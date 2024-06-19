@@ -92,19 +92,19 @@ export default function Home() {
                     <Input
                       {...register('firstName')}
                       autoFocus
-                      label="firstName"
+                      label="First Name"
                       placeholder="Enter your first name"
                       variant="bordered"
                     />
                     <Input
                       {...register('lastName')}
-                      label="lastName"
+                      label="Last Name"
                       placeholder="Enter your last name"
                       variant="bordered"
                     />
                     <Input
                       {...register('phone')}
-                      label="phone"
+                      label="Phone"
                       placeholder="Enter your phone"
                       type="text"
                       variant="bordered"
