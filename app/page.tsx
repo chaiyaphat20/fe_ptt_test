@@ -26,7 +26,7 @@ export default function Home() {
     }
   };
 
-  const { register, handleSubmit, formState: { errors } } = useForm<UserRegisterBody>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<UserRegisterBody>({
     resolver: zodResolver(UserRegisterSchema),
   })
 
@@ -114,7 +114,10 @@ export default function Home() {
 
 
                   <ModalFooter>
-                    <Button color="danger" variant="flat" onPress={onClose}>
+                    <Button color="danger" variant="flat" onPress={() => {
+                      reset()
+                      onClose()
+                    }}>
                       Close
                     </Button>
 
