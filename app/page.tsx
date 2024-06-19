@@ -11,20 +11,13 @@ import { UserRegisterBody, UserRegisterSchema } from "./models/user-model";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
-import { error } from "console";
+import { onKeyDownOnlyNumber } from "./utils/shared-fn";
 
 export default function Home() {
   const [rooms, setRooms] = useState<RoomResponse[]>([])
   const [selectRooms, setSelectRooms] = useState<RoomResponse>()
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter()
-
-  const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Backspace', 'ArrowLeft', 'ArrowRight'];
-  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!allowedKeys.includes(event.key)) {
-      event.preventDefault();
-    }
-  };
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<UserRegisterBody>({
     resolver: zodResolver(UserRegisterSchema),
@@ -108,10 +101,9 @@ export default function Home() {
                       placeholder="Enter your phone"
                       type="text"
                       variant="bordered"
-                      onKeyDown={onKeyDown}
+                      onKeyDown={onKeyDownOnlyNumber}
                     />
                   </ModalBody>
-
 
                   <ModalFooter>
                     <Button color="danger" variant="flat" onPress={() => {
@@ -121,9 +113,9 @@ export default function Home() {
                       Close
                     </Button>
 
-                    <button className="px-4 py3.5 rounded-xl bg-blue-500 shadow-md text-white">
+                    <Button color="primary" variant="flat" type="submit" >
                       OK
-                    </button>
+                    </Button>
                   </ModalFooter>
                 </form>
               </>

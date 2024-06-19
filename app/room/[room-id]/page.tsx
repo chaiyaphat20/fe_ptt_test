@@ -2,6 +2,7 @@
 
 import { RoomResponse } from '@/app/models/room-model'
 import { getRoomById } from '@/app/services/room-setvice'
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import React, { useEffect, useState } from 'react'
 
 export default function Page({
@@ -29,6 +30,31 @@ export default function Page({
   }, [roomId])
 
   return (
-    <div>{room?.name}</div>
+    <div>
+      <Table aria-label="Example static collection table">
+        <TableHeader >
+          <TableColumn className='text-center'>First Name</TableColumn>
+          <TableColumn className='text-center'>Last Name</TableColumn>
+          <TableColumn className='text-center'>Phone</TableColumn>
+        </TableHeader>
+        <TableBody >
+          {room ? (
+            room.users.map((item, index) => (
+              <TableRow key={index} className='text-center'>
+                <TableCell>{item.firstName}</TableCell>
+                <TableCell>{item.lastName}</TableCell>
+                <TableCell>{item.phone}</TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow className='text-center'>
+              <TableCell >Loading...</TableCell>
+              <TableCell >Loading...</TableCell>
+              <TableCell>Loading...</TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
   )
 }
